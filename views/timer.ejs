@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Timer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ICONS -->
+    <!-- <script
+      src="https://kit.fontawesome.com/6f3103b13c.js"
+      crossorigin="anonymous"
+    ></script> -->
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../public/style.css" />
+    <link
+      href="/fontawesome-free-6.4.0-web/css/fontawesome.css"
+      rel="stylesheet"
+    />
+    <link href="/fontawesome-free-6.4.0-web/css/solid.css" rel="stylesheet" />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="painel">
+          <p id="work">Work</p>
+          <p id="break">Break</p>
+        </div>
+
+        <div class="timer">
+          <div class="circle">
+            <div class="time">
+              <p id="minutes">25</p>
+              <p>:</p>
+              <p id="seconds">00</p>
+            </div>
+          </div>
+        </div>
+        <label for="workTimeInput">Work Time (minutes): </label>
+        <input type="number" id="workTimeInput" min="1" value="25" />
+
+        <label for="breakTimeInput">Break Time (minutes): </label>
+        <input type="number" id="breakTimeInput" min="1" value="5" />
+
+        <div class="controls">
+          <button id="start" onclick="start()">
+            <i class="fa-solid fa-play" style="color: #ffffff"></i>
+          </button>
+
+          <!-- HTML -->
+          <button id="reset" onclick="resetTimer()">
+            <i class="fa-solid fa-arrow-rotate-left" style="color: #ffffff"></i>
+          </button>
+          
+        </div>
+      </div>
+      <script>
+        function resetAndRedirect() {
+          // Add your reset timer logic here
+      
+          // Get the current URL
+          const currentUrl = window.location.href;
+      
+          // Redirect to the current URL
+          window.location.href = currentUrl;
+        }
+      </script>
+      
+      
+    </section>
+
+    <!-- SCRIPT -->
+    <script src="../public/timer.js"></script>
+  </body>
+</html>

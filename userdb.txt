@@ -1,0 +1,3 @@
+{"username":"yg2348","fullname":"Yaashna Gupta","password":"$2b$10$HsWKRQpp3XqebdAGK647L.fWzXBdqUd9ZQYOT60jkevGoDgoALRxa","_id":"905rvq7d0QxcI13y"}
+{"username":"yg2348@nyu.edu","fullname":"Yaashna Gupta","password":"$2b$10$iCkwHARwM7cwk5wMz9lw2.gzZ44TLJudbiBDUncP54KJZehL0.D..","_id":"TzI8GyoY1uoBPL2j"}
+{"username":"yg2348","fullname":"Yaashna Gupta","password":"$2b$10$0JfyucP8qEJdBqswNDwF2uVUXuaw.nDxULyczEnZmHEK9Cd4P2Rq.","_id":"p4TGL2jtMAcDTCPV"}
