@@ -183,3 +183,168 @@ const addVideoStream = (videoEl, stream, name) => {
 //     document.getElementById("city").style.display="none"
 
 // }
+function updateSpotifyPlayer() {
+    // Get the user's input from the text field
+    var userInput = document.getElementById('spotifyUrl').value;
+
+    // Extract the playlist ID from the Spotify URL
+    var playlistId = getPlaylistIdFromUrl(userInput);
+
+    // Generate the Spotify player iframe with the updated playlist ID
+    var iframeCode = generateSpotifyIframe(playlistId);
+
+    // Update the content of the 'spotifyPlayer' div with the new iframe code
+    document.getElementById('spotifyPlayer').innerHTML = iframeCode;
+}
+
+function getPlaylistIdFromUrl(url) {
+    // Implement logic to extract the playlist ID from the Spotify URL
+    // Assuming the playlist ID is the last part of the URL
+    var parts = url.split('/');
+    return parts[parts.length - 1];
+}
+
+function generateSpotifyIframe(playlistId) {
+    // Generate the Spotify iframe code with the provided playlist ID
+    var iframeCode = '<iframe src="https://open.spotify.com/embed/playlist/' + playlistId + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>';
+    return iframeCode;
+}
+
+
+function changeBackground(){
+    let  bgBtn= document.getElementById("backgrounds")
+    if (bgBtn.style.display === "block") {
+        bgBtn.style.display = "none";
+    } else {
+        bgBtn.style.display = "block";
+    }
+}
+function music(){
+    let  spotifyBtn= document.getElementById("spotify-player")
+    if (spotifyBtn.style.display === "block") {
+        spotifyBtn.style.display = "none";
+    } else {
+        spotifyBtn.style.display = "block";
+    }
+}
+function rainBg() {
+    // Switch the display property of the images
+    var rainImage = document.getElementById("rain");
+    var cityImage = document.getElementById("city");
+    var seaImage = document.getElementById("sea");
+    var treeImage = document.getElementById("tree");
+    var firefliesImage = document.getElementById("fireflies");
+    var laptopImage = document.getElementById("laptop");
+
+    if (rainImage.style.display === "none") {
+        rainImage.style.display = "block";
+        cityImage.style.display = "none";
+        seaImage.style.display = "none";
+        laptopImage.style.display = "none";
+        treeImage.style.display = "none";
+        seaImage.style.display = "none";
+        firefliesImage.style.display = "none";
+
+    } 
+}
+function treeBg() {
+    // Switch the display property of the images
+    var rainImage = document.getElementById("rain");
+    var cityImage = document.getElementById("city");
+    var seaImage = document.getElementById("sea");
+    var treeImage = document.getElementById("tree");
+    var firefliesImage = document.getElementById("fireflies");
+    var laptopImage = document.getElementById("laptop");
+
+    if (treeImage.style.display === "none") {
+        rainImage.style.display = "none";
+        cityImage.style.display = "none";
+        seaImage.style.display = "none";
+        laptopImage.style.display = "none";
+        treeImage.style.display = "block";
+        seaImage.style.display = "none";
+        firefliesImage.style.display = "none";
+
+    } 
+}
+    function cityBg() {
+    // Switch the display property of the images
+    var rainImage = document.getElementById("rain");
+    var cityImage = document.getElementById("city");
+    var seaImage = document.getElementById("sea");
+    var treeImage = document.getElementById("tree");
+    var firefliesImage = document.getElementById("fireflies");
+    var laptopImage = document.getElementById("laptop");
+
+    if (cityImage.style.display === "none") {
+        rainImage.style.display = "none";
+        cityImage.style.display = "block";
+        seaImage.style.display = "none";
+        laptopImage.style.display = "none";
+        treeImage.style.display = "none";
+        seaImage.style.display = "none";
+        firefliesImage.style.display = "none";
+
+    } 
+    
+}
+function laptopBg() {
+    // Switch the display property of the images
+    var rainImage = document.getElementById("rain");
+    var cityImage = document.getElementById("city");
+    var seaImage = document.getElementById("sea");
+    var treeImage = document.getElementById("tree");
+    var firefliesImage = document.getElementById("fireflies");
+    var laptopImage = document.getElementById("laptop");
+
+    if (laptopImage.style.display === "none") {
+        rainImage.style.display = "none";
+        cityImage.style.display = "none";
+        seaImage.style.display = "none";
+        laptopImage.style.display = "block";
+        treeImage.style.display = "none";
+        seaImage.style.display = "none";
+        firefliesImage.style.display = "none";
+
+    } 
+    
+}
+function firefliesBg() {
+
+    var rainImage = document.getElementById("rain");
+    var cityImage = document.getElementById("city");
+    var seaImage = document.getElementById("sea");
+    var treeImage = document.getElementById("tree");
+    var firefliesImage = document.getElementById("fireflies");
+    var laptopImage = document.getElementById("laptop");
+
+    if (firefliesImage.style.display === "none") {
+        rainImage.style.display = "none";
+        cityImage.style.display = "none";
+        seaImage.style.display = "none";
+        laptopImage.style.display = "none";
+        treeImage.style.display = "none";
+        seaImage.style.display = "none";
+        firefliesImage.style.display = "block";
+
+    } 
+}
+function seaBg() {
+    // Switch the display property of the images
+    var rainImage = document.getElementById("rain");
+    var cityImage = document.getElementById("city");
+    var seaImage = document.getElementById("sea");
+    var treeImage = document.getElementById("tree");
+    var firefliesImage = document.getElementById("fireflies");
+    var laptopImage = document.getElementById("laptop");
+
+    if (seaImage.style.display === "none") {
+        rainImage.style.display = "none";
+        cityImage.style.display = "none";
+        seaImage.style.display = "block";
+        laptopImage.style.display = "none";
+        treeImage.style.display = "none";
+        firefliesImage.style.display = "none";
+
+    } 
+}

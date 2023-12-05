@@ -1,124 +1,119 @@
-let workTittle = document.getElementById('work');
-let breakTittle = document.getElementById('break');
+let focusButton = document.getElementById("focus");
+let buttons = document.querySelectorAll(".btn");
+let shortBreakButton = document.getElementById("shortbreak");
+let longBreakButton = document.getElementById("longbreak");
+let startBtn = document.getElementById("btn-start");
+let reset = document.getElementById("btn-reset");
+let pause = document.getElementById("btn-pause");
+let time = document.getElementById("time");
+let set;
+let active = "focus";
+let count = 59;
+let paused = true;
+let minCount = 24;
+let customTimeInput = document.getElementById("customTimeInput");
 
-let workTime = 25;
-let breakTime = 5;
-
-let seconds = "00";
-let breakCount = 0;
-
-// Declare global interval IDs
-let timerInterval;
-let breakInterval;
-
-// Declare initial values
-let initialWorkTime;
-let initialBreakTime;
-
-// display
-window.onload = () => {
-    // Store initial values when the page loads
-
-  
-    document.getElementById('minutes').innerHTML = workTime;
-    document.getElementById('seconds').innerHTML = seconds;
-    initialWorkTime = workTime;
-    initialBreakTime = breakTime;
-    workTittle.classList.add('active');
-}
+time.textContent = `${minCount + 1}:00`;
+customTimeInput.addEventListener("input", () => {
+  if (active === "custom") {
+    // If the timer is currently set to custom time, update the displayed time
+    minCount = parseInt(customTimeInput.value) - 1;
+    count = 59;
+    time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
+  }
+});
 
 
-// Function to update the display
-function updateDisplay(minutes, seconds) {
-  document.getElementById('minutes').innerHTML = minutes;
-  document.getElementById('seconds').innerHTML = seconds;
-}
-function start() {
-    workTittle.classList.add('active');
-    // Clear existing intervals
-    clearInterval(timerInterval);
-    clearInterval(breakInterval);
-  
-    // Change button
-    workTime = parseInt(document.getElementById('workTimeInput').value);
-    let breakTime = parseInt(document.getElementById('breakTimeInput').value);
+const appendZero = (value) => {
+  value = value < 10 ? `0${value}` : value;
+  return value;
+};
 
-    document.getElementById('start').style.display = "none";
-    document.getElementById('reset').style.display = "block";
-  
-    // Change the time
-    seconds = 59;
-  
-    let workMinutes = workTime - 1;
-    let breakMinutes = breakTime - 1;
-  
-    breakCount = 0;
-  
-    // Countdown
-    timerInterval = setInterval(() => {
-      // Change the display
-      updateDisplay(workMinutes, seconds);
-  
-      // Start
-      if (workMinutes === 0 && seconds === 0) {
-        startBreak(breakMinutes);
-        workTittle.classList.remove('active');
-        breakTittle.classList.add('active');
-        breakCount++;
-      } else {
-        seconds = seconds - 1;
-        if (seconds < 0 && workMinutes > 0) {
-          workMinutes = workMinutes - 1;
-          seconds = 59;
+reset.addEventListener(
+  "click",
+  (resetTime = () => {
+    pauseTimer();
+    switch (active) {
+      case "long":
+        minCount = 14;
+        break;
+      case "short":
+        minCount = 4;
+        break;
+      default:
+        minCount = 24;
+        break;
+    }
+    count = 59;
+    time.textContent = `${minCount + 1}:00`;
+  })
+);
+
+const removeFocus = () => {
+  buttons.forEach((btn) => {
+    btn.classList.remove("btn-focus");
+  });
+};
+
+focusButton.addEventListener("click", () => {
+  removeFocus();
+  focusButton.classList.add("btn-focus");
+  pauseTimer();
+  minCount = 24;
+  count = 59;
+  time.textContent = `${minCount + 1}:00`;
+});
+
+shortBreakButton.addEventListener("click", () => {
+  active = "short";
+  removeFocus();
+  shortBreakButton.classList.add("btn-focus");
+  pauseTimer();
+  minCount = 4;
+  count = 59;
+  time.textContent = `${appendZero(minCount + 1)}:00`;
+});
+
+longBreakButton.addEventListener("click", () => {
+  active = "long";
+  removeFocus();
+  longBreakButton.classList.add("btn-focus");
+  pauseTimer();
+  minCount = 14;
+  count = 59;
+  time.textContent = `${minCount + 1}:00`;
+});
+
+pause.addEventListener(
+  "click",
+  (pauseTimer = () => {
+    paused = true;
+    clearInterval(set);
+    startBtn.classList.remove("hide");
+    pause.classList.remove("show");
+    reset.classList.remove("show");
+  })
+);
+
+startBtn.addEventListener("click", () => {
+  reset.classList.add("show");
+  pause.classList.add("show");
+  startBtn.classList.add("hide");
+  startBtn.classList.remove("show");
+  if (paused) {
+    paused = false;
+    time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
+    set = setInterval(() => {
+      count--;
+      time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
+      if (count == 0) {
+        if (minCount != 0) {
+          minCount--;
+          count = 60;
+        } else {
+          clearInterval(set);
         }
       }
-    }, 100); // 1000 = 1s
-}
-
-
-
-function startBreak(breakMinutes) {
-    // Display the initial break time
-
-    updateDisplay(breakMinutes, "00");
-
-    breakInterval = setInterval(() => {
-        // Change the display
-        updateDisplay(breakMinutes, seconds);
-        console.log(breakMinutes) + "***";
-
-        // Start
-        if (breakMinutes === 0 && seconds === 0) {
-            start()
-            // clearInterval(breakInterval);
-            // You might want to add additional logic here for what happens after the break
-        } else {
-            seconds = seconds - 1;
-            if (seconds < 0 && breakMinutes > 0) {
-                breakMinutes = breakMinutes - 1;
-                seconds = 59;
-            }
-        }
-    }, 1000); // 1000 = 1s
-}
-
-
-
-  
-  function resetTimer() {
-    // Clear existing intervals
-    clearInterval(timerInterval);
-    clearInterval(breakInterval);
-  
-    // Reset the display
-    workTittle.classList.add('active');
-    updateDisplay(workTime, "00");
-  
-    // Reset the timer variables to initial values
-    workCount = 0;
-    seconds = "00";
-  
-    // Display the start button
-    document.getElementById('start').style.display = "block";
-    document.getElementById('reset').style.display = "none";
-}
+    }, 1000);
+  }
+});

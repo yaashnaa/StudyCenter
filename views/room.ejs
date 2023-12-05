@@ -1,107 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="http://localhost:3030/public/styles.css">
+
+    <link rel="stylesheet" href="http://localhost:3030/public/styles.css" />
+    <link rel="stylesheet" href="http://localhost:3030/public/style.css" />
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.3.1/peerjs.min.js.map"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
     <script src="/socket.io/socket.io.js"></script>
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  />
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap"
-    rel="stylesheet"
-  />
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
     <link
       href="/fontawesome-free-6.4.0-web/css/fontawesome.css"
       rel="stylesheet"
     />
     <link href="/fontawesome-free-6.4.0-web/css/solid.css" rel="stylesheet" />
     <script
-    src="https://kit.fontawesome.com/4737a162b6.js"
-    crossorigin="anonymous"
-  ></script>
+      src="https://kit.fontawesome.com/4737a162b6.js"
+      crossorigin="anonymous"
+    ></script>
     <script>
-        const myname = "<%= Myname %>";
-        const roomId = "<%= roomid %>";
-        const roomName = "<%= roomName %>";
-
+      const myname = "<%= Myname %>";
+      const roomId = "<%= roomid %>";
+      const roomName = "<%= roomName %>";
     </script>
-    
-</head>
+  </head>
 
-<body>
-
-    <div class="navbar"> 
-        <div class="navbar-left"> 
-         <a href="/">  <button class="button-85"> <i class="fa-solid fa-graduation-cap fa-lg" style="color: #ffffff;"></i> StudyHub </button>   </a>
-        </div>
-        <div class="header"> 
-            <h3><%=roomName %></h3> 
-        </div>
-        <div class="navbar-right"> 
-
-            <div class="bg-flex">
-                <div class="nav-items">
-                  <div class="hover-parent">
-                    <button class="button-85" onclick="changeBackground()">
-                      <i class="fa-solid fa-image fa-lg" style="color: #ffffff;"></i>
-                    </button>
-                    <div id="backgrounds">
-                      <button class="bg-btns" onclick="rainBg()" style="cursor: pointer;">City</button>
-                      <button class="bg-btns" onclick="treeBg()" style="cursor: pointer;">Tree</button>
-                      <button class="bg-btns" onclick="firefliesBg()" style="cursor: pointer;">fireflies</button>
-                      <button class="bg-btns" onclick="seaBg()" style="cursor: pointer;">Sea</button>
-                      <button class="bg-btns" onclick="laptopBg()" style="cursor: pointer;">Laptop</button>
-                      <button class="bg-btns" onclick="cityBg()" style="cursor: pointer;">Rain</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              
-
-            <div class="nav-items"> <button class="button-85"> <i class="fa-solid fa-music fa-lg" style="color: #ffffff;"></i></button></div>
-            <div class="nav-items"> <button class="button-85"> <i class="fa-solid fa-gamepad fa-lg" style="color: #ffffff;"></i></button></div>
-            
-            
-           
-  
-        </div>
-    </div>
-
-
- <script> 
- 
-
-function invite(){
-            let  invitebtn= document.getElementById("invite")
-            let inviteID= document.getElementById("invite-info")
-            if (inviteID.style.display === "block") {
-                inviteID.style.display = "none";
-            } else {
-                inviteID.style.display = "block";
-            }
+  <body>
+    <script>
+      function invite() {
+        let invitebtn = document.getElementById("invite");
+        let inviteID = document.getElementById("invite-info");
+        if (inviteID.style.display === "block") {
+          inviteID.style.display = "none";
+        } else {
+          inviteID.style.display = "block";
         }
+      }
+    </script>
 
- </script> 
-
-
-  
-
-  
+      
     <div class="modal fade" id="getCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content" style="color: black;">
@@ -121,214 +94,211 @@ function invite(){
         </div>
     </div>
 
-    <script>
-        
-
-        // function changeBackground(){
-        //     let  bgBtn= document.getElementById("backgrounds")
-        //     if (bgBtn.style.display === "block") {
-        //         bgBtn.style.display = "none";
-        //     } else {
-        //         bgBtn.style.display = "block";
-        //     }
-        // }
-        function rainBg() {
-            // Switch the display property of the images
-            var rainImage = document.getElementById("rain");
-            var cityImage = document.getElementById("city");
-            var seaImage = document.getElementById("sea");
-            var treeImage = document.getElementById("tree");
-            var firefliesImage = document.getElementById("fireflies");
-            var laptopImage = document.getElementById("laptop");
-    
-            if (rainImage.style.display === "none") {
-                rainImage.style.display = "block";
-                cityImage.style.display = "none";
-                seaImage.style.display = "none";
-                laptopImage.style.display = "none";
-                treeImage.style.display = "none";
-                seaImage.style.display = "none";
-                firefliesImage.style.display = "none";
-
-            } 
-        }
-        function treeBg() {
-            // Switch the display property of the images
-            var rainImage = document.getElementById("rain");
-            var cityImage = document.getElementById("city");
-            var seaImage = document.getElementById("sea");
-            var treeImage = document.getElementById("tree");
-            var firefliesImage = document.getElementById("fireflies");
-            var laptopImage = document.getElementById("laptop");
-    
-            if (treeImage.style.display === "none") {
-                rainImage.style.display = "none";
-                cityImage.style.display = "none";
-                seaImage.style.display = "none";
-                laptopImage.style.display = "none";
-                treeImage.style.display = "block";
-                seaImage.style.display = "none";
-                firefliesImage.style.display = "none";
-
-            } 
-        }
-            function cityBg() {
-            // Switch the display property of the images
-            var rainImage = document.getElementById("rain");
-            var cityImage = document.getElementById("city");
-            var seaImage = document.getElementById("sea");
-            var treeImage = document.getElementById("tree");
-            var firefliesImage = document.getElementById("fireflies");
-            var laptopImage = document.getElementById("laptop");
-    
-            if (cityImage.style.display === "none") {
-                rainImage.style.display = "none";
-                cityImage.style.display = "block";
-                seaImage.style.display = "none";
-                laptopImage.style.display = "none";
-                treeImage.style.display = "none";
-                seaImage.style.display = "none";
-                firefliesImage.style.display = "none";
-
-            } 
-            
-        }
-        function laptopBg() {
-            // Switch the display property of the images
-            var rainImage = document.getElementById("rain");
-            var cityImage = document.getElementById("city");
-            var seaImage = document.getElementById("sea");
-            var treeImage = document.getElementById("tree");
-            var firefliesImage = document.getElementById("fireflies");
-            var laptopImage = document.getElementById("laptop");
-    
-            if (laptopImage.style.display === "none") {
-                rainImage.style.display = "none";
-                cityImage.style.display = "none";
-                seaImage.style.display = "none";
-                laptopImage.style.display = "block";
-                treeImage.style.display = "none";
-                seaImage.style.display = "none";
-                firefliesImage.style.display = "none";
-
-            } 
-            
-        }
-        function firefliesBg() {
-
-            var rainImage = document.getElementById("rain");
-            var cityImage = document.getElementById("city");
-            var seaImage = document.getElementById("sea");
-            var treeImage = document.getElementById("tree");
-            var firefliesImage = document.getElementById("fireflies");
-            var laptopImage = document.getElementById("laptop");
-    
-            if (firefliesImage.style.display === "none") {
-                rainImage.style.display = "none";
-                cityImage.style.display = "none";
-                seaImage.style.display = "none";
-                laptopImage.style.display = "none";
-                treeImage.style.display = "none";
-                seaImage.style.display = "none";
-                firefliesImage.style.display = "block";
-
-            } 
-        }
-        function seaBg() {
-            // Switch the display property of the images
-            var rainImage = document.getElementById("rain");
-            var cityImage = document.getElementById("city");
-            var seaImage = document.getElementById("sea");
-            var treeImage = document.getElementById("tree");
-            var firefliesImage = document.getElementById("fireflies");
-            var laptopImage = document.getElementById("laptop");
-    
-            if (seaImage.style.display === "none") {
-                rainImage.style.display = "none";
-                cityImage.style.display = "none";
-                seaImage.style.display = "block";
-                laptopImage.style.display = "none";
-                treeImage.style.display = "none";
-                firefliesImage.style.display = "none";
-
-            } 
-        }
-    </script>
-
-
-
-    <div id="timer-video"> 
-        <%- include('timer.ejs') %>
-        <div id="mainclone" style="display: block;">
-            
-            <!-- <img src-="../static/city.gif"> -->
-
-            <div class="main_left">
-                <div class="main_videos">
-                    <div id="video-grids"> </div>
-                </div>
+    <div id="mainclone" style="display: block">
+      <div class="navbar-room">
+        <div class="navbar-left-room">
+          <a href="/">
+            <button class="button-85">
+              <i
+                class="fa-solid fa-graduation-cap fa-lg"
+                style="color: #ffffff"
+              ></i>
+              StudyHub
+            </button>
+          </a>
+        </div>
+        <div class="header">
+          <h3><%=roomName %></h3>
+        </div>
+        <div class="navbar-right-room">
+          <div class="nav-items-room">
+            <div class="bg-flex">
+              <button class="button-85" onclick="changeBackground()">
+                <i class="fa-solid fa-image fa-lg" style="color: #ffffff"></i>
+              </button>
             </div>
-            <div class="main_right" id="chat">
-
-                <div class="main_right_header">
-                    <h6>Chat Area</h6>
-                </div>
-
-                <div class="main__chat_window" id="main__chat_window">
-                    <ul class="messages" id="messageadd">
-                    </ul>
-                </div>
-    
-                <div class="main__message_container">
-                    <input type="text" id="chat_message" onkeydown="sendmessage(this)" placeholder="Type message here.." />
-                </div>
-    
+            <div id="backgrounds">
+              <button
+                class="bg-btns"
+                onclick="rainBg()"
+                style="cursor: pointer"
+              >
+                City
+              </button>
+              <button
+                class="bg-btns"
+                onclick="treeBg()"
+                style="cursor: pointer"
+              >
+                Tree
+              </button>
+              <button
+                class="bg-btns"
+                onclick="firefliesBg()"
+                style="cursor: pointer"
+              >
+                fireflies
+              </button>
+              <button class="bg-btns" onclick="seaBg()" style="cursor: pointer">
+                Sea
+              </button>
+              <button
+                class="bg-btns"
+                onclick="laptopBg()"
+                style="cursor: pointer"
+              >
+                Laptop
+              </button>
+              <button
+                class="bg-btns"
+                onclick="cityBg()"
+                style="cursor: pointer"
+              >
+                Rain
+              </button>
             </div>
+          </div>
 
-        </div>    
-    
+          <div class="nav-items-room">
+            <button class="button-85" onclick="music()">
+              <i class="fa-solid fa-music fa-lg" style="color: #ffffff"></i>
+            </button>
+            <div class="spotify-flex">
+              <div id="spotify-player" style="display: none">
+                <div class="button-flex">
+                  <label for="spotifyUrl">Enter Spotify URL:</label>
+                  <input
+                    type="text"
+                    id="spotifyUrl"
+                    placeholder="https://open.spotify.com/playlist/your_playlist_id"
+                  />
+
+                  <!-- Button to update the Spotify player with the user's input -->
+                  <button
+                    class="button-11"
+                    style="color: white; text-align: center"
+                    onclick="updateSpotifyPlayer()"
+                  >
+                    Update Player
+                  </button>
+
+                  <!-- Container for the Spotify player -->
+                  <div id="spotifyPlayer"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-items-room">
+            <button class="button-85">
+              <i class="fa-solid fa-gamepad fa-lg" style="color: #ffffff"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="timer-div"><%- include('timer.ejs') %></div>
+
+      <div class="main_left">
+        <div class="main_videos">
+          <div id="video-grids"></div>
+        </div>
+      </div>
+      <div class="main_right" id="chat">
+        <div class="main_right_header">
+          <h6>Chat Area</h6>
+        </div>
+
+        <div class="main__chat_window" id="main__chat_window">
+          <ul class="messages" id="messageadd"></ul>
+        </div>
+
+        <div class="main__message_container">
+          <input
+            type="text"
+            id="chat_message"
+            onkeydown="sendmessage(this)"
+            placeholder="Type message here.."
+          />
+        </div>
+      </div>
+      <div class="main_controls">
+        <div class="main_controls_block">
+          <div class="main_controls_button" id="mic" onclick="muteUnmute()">
+            <i class="fas fa-microphone-slash"></i>
+            <span>Mute</span>
+          </div>
+
+          <div
+            class="main_controls_button"
+            id="video"
+            onclick="VideomuteUnmute()"
+          >
+            <i class="fas fa-video-slash"></i>
+            <span>Stop Video</span>
+          </div>
+        </div>
+        <div class="main_controls_block">
+          <div class="main_controls_button" onclick="invitebox()">
+            <i class="fas fa-user-plus"></i>
+            <span>Invite</span>
+          </div>
+          <div class="main_controls_button">
+            <i class="fas fa-user-friends"></i>
+            <span>Participants</span>
+          </div>
+          <div class="main_controls_button" onclick="showchat()">
+            <i class="fas fa-comment-alt"></i>
+            <span>Chat</span>
+          </div>
+        </div>
+        <div class="main_controls_block">
+          <div class="main_controls_button leave_red">
+            <span class="leave_meeting"><a href="/">Leave Meeting</a></span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="main_controls">
-        <div class="main_controls_block">
-            <div class="main_controls_button" id="mic" onclick="muteUnmute()">
-                <i class="fas fa-microphone-slash"></i>
-                <span>Mute</span>
-            </div>
 
-            <div class="main_controls_button" id="video" onclick="VideomuteUnmute()">
-                <i class="fas fa-video-slash"></i>
-                <span>Stop Video</span>
-            </div>
-        </div>
-        <div class="main_controls_block">
-            <div class="main_controls_button" onclick="invitebox()">
-                <i class="fas fa-user-plus"></i>
-                <span>Invite</span>
-            </div>
-            <div class="main_controls_button">
-                <i class="fas fa-user-friends"></i>
-                <span>Participants</span>
-            </div>
-            <div class="main_controls_button" onclick="showchat()">
-                <i class="fas fa-comment-alt"></i>
-                <span>Chat</span>
-            </div>
-        </div>
-        <div class="main_controls_block">
-            <div class="main_controls_button leave_red">
-                <span class="leave_meeting"><a href="/">Leave Meeting</a></span>
-            </div>
-        </div>
-    </div>
-    <img id="rain" src="../public/city.gif" alt="Animated GIF" style="display: block;">
-            <img id="city" src="../public/rain.gif" alt="Animated GIF" style="display: none;">
-            <img id="sea" src="../public/sea.gif" alt="Animated GIF" style="display: none;">
-            <img id="laptop" src="../public/laptop.gif" alt="Animated GIF" style="display: none;">
-            <img id="fireflies" src="../public/fireflies.gif" alt="Animated GIF" style="display: none;">
-            <img id="tree" src="../public/tree.gif" alt="Animated GIF" style="display: none;">
-           
-    
+
+    <img
+      id="rain"
+      src="../public/city.gif"
+      alt="Animated GIF"
+      style="display: block"
+    />
+    <img
+      id="city"
+      src="../public/rain.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+    <img
+      id="sea"
+      src="../public/sea.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+    <img
+      id="laptop"
+      src="../public/laptop.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+    <img
+      id="fireflies"
+      src="../public/fireflies.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+    <img
+      id="tree"
+      src="../public/tree.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+
     <script src="http://localhost:3030/public/main.js"></script>
-</body>
-
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+    
+  </body>
 </html>

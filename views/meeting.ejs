@@ -10,40 +10,33 @@
   </head>
 
   <body>
-    <%- include('navbar.ejs') %>
-
     <div class="Name-Page">
-      <div class="form">
-        <div class="join-form">
-          <form class="known-form" action="/join">
-            <input type="text" placeholder="Enter your name" name="name" />
-            <input type="text" placeholder="Enter room name" name="roomName" />
-            <button class="bg-btns">Host a Meeting</button>
-            <!-- <p> <a href="javascript:show()">Join Meeting?</a></p> -->
-          </form>
-        </div>
-        <span style="font-size: 2rem"> or </span>
-        <div class="old-join-form">
-          <form class="unknown-form" action="/joinold">
-            <input type="text" placeholder="Enter your name" name="name" />
-            <input
-              type="text"
-              placeholder="Enter Meeting Id"
-              name="meeting_id"
-            />
-            <button class="bg-btns">Join Meeting</button>
-            <!-- <p>
+      <div class="join-form">
+        <form class="known-form" action="/join">
+          <input type="text" placeholder="Enter your name" name="name" required/>
+          <input type="text" placeholder="Enter room name" name="roomName" required/>
+          <button class="bg-btns">Host a Meeting</button>
+          <!-- <p> <a href="javascript:show()">Join Meeting?</a></p> -->
+        </form>
+      </div>
+
+      <div class="old-join-form">
+        <form class="unknown-form" action="/joinold">
+          <input type="text" placeholder="Enter your name" name="name" required/>
+          <input type="text" placeholder="Enter Meeting Id" name="meeting_id" required/>
+          <button class="bg-btns">Join Meeting</button>
+          <!-- <p>
                     <a href="javascript:show()">Host Meeting?</a>
                 </p> -->
-          </form>
+        </form>
+      </div>
+      <div class="solo-study-form">
+      <div class="solo-study">
+     
+          <button class="bg-btns">Start solo study</button>
         </div>
+     
       </div>
     </div>
-
-    <script>
-      function show() {
-        $("form").animate({ height: "toggle", opacity: "toggle" }, "slow");
-      }
-    </script>
   </body>
 </html>

@@ -14,6 +14,15 @@ const url = require("url");
 const peerServer = ExpressPeerServer(server, {
   debug: true,
 });
+class Room {
+  constructor(roomId, roomName, creator) {
+    this.roomId = roomId;
+    this.roomName = roomName;
+    this.creator = creator;
+  }
+}
+const activeRooms = [];
+
 const path = require("path");
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
 app.set("view engine", "ejs");
@@ -42,15 +51,15 @@ let usersdatabase = new nedb({
     autoload: true,
   });
   
-  // function requiresAuth(req, res, next) {
-  //   if (req.session.loggedInUser) {
-  //     console.log("requires auth: " + req.path);
-  //     next();
-  //     // res.redirect('/quizzes')
-  //   } else {
-  //     res.redirect("/login?error=true");
-  //   }
-  // }
+  function requiresAuth(req, res, next) {
+    if (req.session.loggedInUser) {
+      console.log("requires auth: " + req.path);
+      next();
+      // res.redirect('/quizzes')
+    } else {
+      res.redirect("/login?error=true");
+    }
+  }
   app.get("/signup", (req, res) => {
     res.render("signup.ejs", {});
   });
@@ -75,9 +84,18 @@ let usersdatabase = new nedb({
       res.redirect("/home");
     });
 });
-app.get("/home", (req, res) => {
-  res.render("home.ejs", {});
+app.get("/home", requiresAuth, (req, res) => {
+  // Check if the user is logged in
+  if (req.session.loggedInUser) {
+    // Pass the username to the rendering context
+    res.render("home.ejs", { username: req.session.loggedInUser, activeRooms: activeRooms, });
+    
+  } else {
+    // Redirect to login if the user is not logged in
+    res.redirect("/login");
+  }
 });
+
   app.post("/login", (req, res) => {
     let data = {
       username: req.body.username,
@@ -110,17 +128,22 @@ app.get("/home", (req, res) => {
   });
   
   
-
-app.get("/join", (req, res) => {
-  roomName= req.query.roomName
-  console.log(roomName);
-  res.redirect(
-    url.format({
-      pathname: `/join/${uuidv4()}`,
-      query: req.query,
-    })
-  );
-});
+  app.get("/join", (req, res) => {
+    const roomName = req.query.roomName;
+    const creator = req.session.loggedInUser; // Assume the creator is the logged-in user
+    const roomId = uuidv4();
+  
+    // Create a new Room instance and add it to the activeRooms array
+    const newRoom = new Room(roomId, roomName, creator);
+    activeRooms.push(newRoom);
+  
+    res.redirect(
+      url.format({
+        pathname: `/join/${roomId}`,
+        query: req.query,
+      })
+    );
+  });
 
 app.get("/joinold", (req, res) => {
   res.redirect(
@@ -144,6 +167,9 @@ app.get("/timer", (req,res)=>{
   res.render('timer.ejs')
 })
 
+app.get("/spotify", (req,res)=>{
+  res.render('spotify.ejs')
+})
 
 // let roomId
 // let myname

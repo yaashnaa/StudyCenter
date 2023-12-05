@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- HTML Code -->
+<label for="spotifyUrl">Enter Spotify URL:</label>
+<input type="text" id="spotifyUrl" placeholder="https://open.spotify.com/playlist/your_playlist_id">
+
+<!-- Button to update the Spotify player with the user's input -->
+<button onclick="updateSpotifyPlayer()">Update Player</button>
+
+<!-- Container for the Spotify player -->
+<div id="spotifyPlayer"></div>
+
+<script>
+function updateSpotifyPlayer() {
+    // Get the user's input from the text field
+    var userInput = document.getElementById('spotifyUrl').value;
+
+    // Extract the playlist ID from the Spotify URL
+    var playlistId = getPlaylistIdFromUrl(userInput);
+
+    // Generate the Spotify player iframe with the updated playlist ID
+    var iframeCode = generateSpotifyIframe(playlistId);
+
+    // Update the content of the 'spotifyPlayer' div with the new iframe code
+    document.getElementById('spotifyPlayer').innerHTML = iframeCode;
+}
+
+function getPlaylistIdFromUrl(url) {
+    // Implement logic to extract the playlist ID from the Spotify URL
+    // Assuming the playlist ID is the last part of the URL
+    var parts = url.split('/');
+    return parts[parts.length - 1];
+}
+
+function generateSpotifyIframe(playlistId) {
+    // Generate the Spotify iframe code with the provided playlist ID
+    var iframeCode = '<iframe src="https://open.spotify.com/embed/playlist/' + playlistId + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>';
+    return iframeCode;
+}
+</script>
+
+</body>
+</html>
