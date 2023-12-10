@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Add some basic styling for the close button */
+    .close {
+      float: right;
+      cursor: pointer;
+    }
+
+    /* Style completed tasks with a line through them */
+    .completed {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <div id="myDIV" class="header">
+    <h2 style="margin: 5px">To Do List</h2>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <input type="text" id="myInput" placeholder="Task..." style="color: white; background-color: transparent; border: white solid 2px;"/>
+      <span onclick="newElement()" class="addBtn">Add</span>
+    </div>
+  </div>
+  
+  <ul id="myUL"></ul>
+
+  <script>
+    // Load tasks from local storage when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+      loadTasks();
+    });
+
+    function deleteTask(element) {
+      var listItem = element.parentElement;
+      listItem.classList.add("completed"); // Add the "completed" class
+      saveTasks();
+    }
+
+    // Add a "checked" symbol when clicking on a list item
+    var list = document.querySelector("ul");
+    list.addEventListener(
+      "click",
+      function (ev) {
+        if (ev.target.tagName === "LI") {
+          ev.target.classList.toggle("checked");
+        }
+      },
+      false
+    );
+
+    // Create a new list item when clicking on the "Add" button
+    function newElement() {
+      var li = document.createElement("li");
+      var inputValue = document.getElementById("myInput").value;
+
+      if (inputValue === "") {
+        alert("You must write something!");
+      } else {
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        document.getElementById("myUL").appendChild(li);
+        addCloseButton(li); // Call the addCloseButton function here
+        saveTasks();
+      }
+
+      document.getElementById("myInput").value = "";
+    }
+
+    function addCloseButton(li) {
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      li.appendChild(span);
+
+      span.onclick = function () {
+        deleteTask(this);
+      };
+    }
+
+    function saveTasks() {
+      // Save tasks to local storage
+      var tasks = [];
+      var listItems = document.querySelectorAll("#myUL li");
+      listItems.forEach(function (item) {
+        tasks.push({
+          text: item.textContent.trim(),
+          completed: item.classList.contains("completed")
+        });
+      });
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function loadTasks() {
+      // Load tasks from local storage
+      var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      var ul = document.getElementById("myUL");
+      ul.innerHTML = ""; // Clear existing list items
+
+      tasks.forEach(function (task) {
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode(task.text));
+        if (task.completed) {
+          li.classList.add("completed");
+        }
+        ul.appendChild(li);
+        addCloseButton(li);
+      });
+    }
+  </script>
+</body>
+</html>

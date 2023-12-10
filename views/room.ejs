@@ -2,15 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="http://localhost:3030/public/styles.css" />
-    <link rel="stylesheet" href="http://localhost:3030/public/style.css" />
+    <link rel="stylesheet" href="../public/styles.css" />
+    <link rel="stylesheet" href="../public/style.css" />
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.3.1/peerjs.min.js.map"></script>
     <script src="/socket.io/socket.io.js"></script>
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
       rel="stylesheet"
@@ -36,7 +38,7 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <script src="/socket.io/socket.io.js"></script>
+   
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -49,32 +51,24 @@
       href="/fontawesome-free-6.4.0-web/css/fontawesome.css"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@300&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <link href="/fontawesome-free-6.4.0-web/css/solid.css" rel="stylesheet" />
     <script
       src="https://kit.fontawesome.com/4737a162b6.js"
       crossorigin="anonymous"
     ></script>
     <script>
-      const myname = "<%= Myname %>";
-      const roomId = "<%= roomid %>";
-      const roomName = "<%= roomName %>";
-    </script>
+        const myname = "<%= myname %>";
+    const roomId = "<%= roomid %>";
+    const roomName = "<%= roomName %>";
+
+      </script>
   </head>
 
-  <body>
-    <script>
-      function invite() {
-        let invitebtn = document.getElementById("invite");
-        let inviteID = document.getElementById("invite-info");
-        if (inviteID.style.display === "block") {
-          inviteID.style.display = "none";
-        } else {
-          inviteID.style.display = "block";
-        }
-      }
-    </script>
-
       
+
+  <body style=" font-family: 'Roboto', sans-serif;">
+
     <div class="modal fade" id="getCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content" style="color: black;">
@@ -87,8 +81,13 @@
                     
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" onclick="cancel()">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="copy()">Copy</button>
+                    <button type="button" style="color: white;" class="btn btn-white" onclick="cancel()">Close</button>
+                    <% console.log(roomid + "*"); %>
+                    <% console.log(roomName + "*"); %>
+                    <button type="button" style="color: white;" class="btn btn-primary" onclick="copy()">Copy</button>
+
+
+
                 </div>
             </div>
         </div>
@@ -96,19 +95,8 @@
 
     <div id="mainclone" style="display: block">
       <div class="navbar-room">
-        <div class="navbar-left-room">
-          <a href="/">
-            <button class="button-85">
-              <i
-                class="fa-solid fa-graduation-cap fa-lg"
-                style="color: #ffffff"
-              ></i>
-              StudyHub
-            </button>
-          </a>
-        </div>
-        <div class="header">
-          <h3><%=roomName %></h3>
+        <div class="header" style="display: none;">
+          
         </div>
         <div class="navbar-right-room">
           <div class="nav-items-room">
@@ -117,45 +105,66 @@
                 <i class="fa-solid fa-image fa-lg" style="color: #ffffff"></i>
               </button>
             </div>
-            <div id="backgrounds">
+            <div id="backgrounds" style="display: none;">
+              <div class="background-div">
+                <div class="bg-img">
+                  <button
+                    class="bg-btns-room"
+                    onclick="rainBg()"  
+                    style="cursor: pointer"
+                  >
+                    City
+                    <img src="../public/uploads/cityimg.png" style="height: 6rem;">
+                  </button>
+               
+                </div>
+              <div class="bg-img">
+                <button
+                  class="bg-btns-room"
+                  onclick="treeBg()"
+                  style="cursor: pointer"
+                >
+                  Tree
+                  <img src="../public/uploads/treeimg.png" style="height: 6rem;">
+                </button>
+              </div>
+              <div class="bg-img">
               <button
-                class="bg-btns"
-                onclick="rainBg()"
-                style="cursor: pointer"
-              >
-                City
-              </button>
-              <button
-                class="bg-btns"
-                onclick="treeBg()"
-                style="cursor: pointer"
-              >
-                Tree
-              </button>
-              <button
-                class="bg-btns"
+                class="bg-btns-room"
                 onclick="firefliesBg()"
                 style="cursor: pointer"
               >
                 fireflies
+                <img src="../public/uploads/firefliesimg.png" style="height: 6rem;">
               </button>
-              <button class="bg-btns" onclick="seaBg()" style="cursor: pointer">
+              </div>
+              <div class="bg-img">
+              <button class="bg-btns-room" onclick="seaBg()" style="cursor: pointer">
                 Sea
+                <img src="../public/uploads/seaimg.png" style="height: 6rem;">
               </button>
+              </div>
+              <div class="bg-img">
               <button
-                class="bg-btns"
+                class="bg-btns-room"
                 onclick="laptopBg()"
                 style="cursor: pointer"
               >
                 Laptop
+                <img src="../public/uploads/laptopimg.png" style="height: 6rem;">
               </button>
+              </div>
+              <div class="bg-img">
               <button
-                class="bg-btns"
+                class="bg-btns-room"
                 onclick="cityBg()"
                 style="cursor: pointer"
               >
                 Rain
+                <img src="../public/uploads/rainimg.png" style="height: 6rem;">
               </button>
+              </div>
+              </div>
             </div>
           </div>
 
@@ -163,38 +172,47 @@
             <button class="button-85" onclick="music()">
               <i class="fa-solid fa-music fa-lg" style="color: #ffffff"></i>
             </button>
+     
             <div class="spotify-flex">
               <div id="spotify-player" style="display: none">
-                <div class="button-flex">
-                  <label for="spotifyUrl">Enter Spotify URL:</label>
-                  <input
-                    type="text"
-                    id="spotifyUrl"
-                    placeholder="https://open.spotify.com/playlist/your_playlist_id"
-                  />
+                <div class="music">
+                    <div class="elfsight-app-f363467f-b95c-49fc-899d-94d485d88eff" data-elfsight-app-lazy></div>
+                    or
+                    <div class="button-flex">
+                      <label for="spotifyUrl">Enter Spotify URL:</label>
+                      <input
+                        type="text"
+                        id="spotifyUrl"
+                        placeholder="https://open.spotify.com/playlist/your_playlist_id"
+                      />
 
-                  <!-- Button to update the Spotify player with the user's input -->
-                  <button
-                    class="button-11"
-                    style="color: white; text-align: center"
-                    onclick="updateSpotifyPlayer()"
-                  >
-                    Update Player
-                  </button>
+                      <!-- Button to update the Spotify player with the user's input -->
+                      <button
+                        class="button-11"
+                        style="color: white; text-align: center"
+                        onclick="updateSpotifyPlayer()"
+                      >
+                        Update Player
+                      </button>
 
-                  <!-- Container for the Spotify player -->
-                  <div id="spotifyPlayer"></div>
-                </div>
+                      <!-- Container for the Spotify player -->
+                      <div id="spotifyPlayer"></div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
           <div class="nav-items-room">
+            <a href="https://www.coolmathgames.com/" target="_blank">
             <button class="button-85">
-              <i class="fa-solid fa-gamepad fa-lg" style="color: #ffffff"></i>
+              <i class="fa-solid fa-gamepad fa-xl" style="color: #ffffff"></i>
             </button>
+            </a>
           </div>
         </div>
       </div>
+
+      <p id="roomName"> <% roomName %> </p>
 
       <div class="timer-div"><%- include('timer.ejs') %></div>
 
@@ -222,83 +240,109 @@
         </div>
       </div>
       <div class="main_controls">
-        <div class="main_controls_block">
-          <div class="main_controls_button" id="mic" onclick="muteUnmute()">
+            <div class="main_controls_left">
+            <div class="navbar-left-room">
+                <a href="/">
+                <button class="button-85">
+                    <i
+                    class="fa-solid fa-graduation-cap fa-lg"
+                    style="color: #ffffff"
+                    ></i>
+                    StudyHub
+                </button>
+                </a>
+            </div>
+            <div
+                class="main_controls_button"
+                style="margin-top: 2rem"
+                onclick="invitebox()"
+            >
+                <i class="fas fa-user-plus fa-xl"></i>
+                Invite
+            </div>
+
+            <div class="main_controls_button">
+                <i class="fas fa-user-friends fa-xl"></i>
+                Participants
+            </div>
+
+            <div class="main_controls_button"  onclick="showchat()">
+                <i class="fas fa-comment-alt fa-xl"></i>
+                Chat
+            </div>
+
+            <div class="main_controls_button" onclick="toggleParticipants()">
+                <i class="fa-regular fa-eye-slash fa-xl"></i>
+                Hide Participants
+            </div>
+            <div class="main_controls_button leave-meeting">
+                <a href="/home"
+                ><i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i> Leave
+                meeting</a
+                >
+            </div>
+            </div>
+      </div>
+      <div class="main_controls_block">
+            <div class="main_controls_button-block" id="mic" onclick="muteUnmute()">
             <i class="fas fa-microphone-slash"></i>
             <span>Mute</span>
-          </div>
+            </div>
 
-          <div
-            class="main_controls_button"
+            <div
+            class="main_controls_button-block"
             id="video"
             onclick="VideomuteUnmute()"
-          >
+            >
             <i class="fas fa-video-slash"></i>
             <span>Stop Video</span>
-          </div>
-        </div>
-        <div class="main_controls_block">
-          <div class="main_controls_button" onclick="invitebox()">
-            <i class="fas fa-user-plus"></i>
-            <span>Invite</span>
-          </div>
-          <div class="main_controls_button">
-            <i class="fas fa-user-friends"></i>
-            <span>Participants</span>
-          </div>
-          <div class="main_controls_button" onclick="showchat()">
-            <i class="fas fa-comment-alt"></i>
-            <span>Chat</span>
-          </div>
-        </div>
-        <div class="main_controls_block">
-          <div class="main_controls_button leave_red">
-            <span class="leave_meeting"><a href="/">Leave Meeting</a></span>
-          </div>
-        </div>
+            </div>
       </div>
     </div>
 
-
     <img
       id="rain"
-      src="../public/city.gif"
+      src="../public/uploads/city.gif"
       alt="Animated GIF"
       style="display: block"
     />
     <img
       id="city"
-      src="../public/rain.gif"
+      src="../public/uploads/rain.gif"
       alt="Animated GIF"
       style="display: none"
     />
     <img
       id="sea"
-      src="../public/sea.gif"
+      src="../public/uploads/sea.gif"
       alt="Animated GIF"
       style="display: none"
     />
     <img
       id="laptop"
-      src="../public/laptop.gif"
+      src="../public/uploads/Laptop.gif"
       alt="Animated GIF"
       style="display: none"
     />
     <img
       id="fireflies"
-      src="../public/fireflies.gif"
+      src="../public/uploads/fireflies.gif"
       alt="Animated GIF"
       style="display: none"
     />
     <img
       id="tree"
-      src="../public/tree.gif"
+      src="../public/uploads/tree.gif"
       alt="Animated GIF"
       style="display: none"
     />
 
-    <script src="http://localhost:3030/public/main.js"></script>
+  
+      
+        <script src="../public/main.js"></script>
     <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
-    
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
   </body>
 </html>

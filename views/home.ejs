@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" sty>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/socket.io/socket.io.js"></script>
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
       rel="stylesheet"
@@ -14,9 +16,12 @@
       href="https://fonts.googleapis.com/css2?family=Neuton:wght@300&display=swap"
       rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Neuton:wght@300&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Neuton:wght@300&family=Roboto:wght@100&display=swap"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap"
@@ -40,48 +45,58 @@
 
     <div class="home">
       <div class="calender-clock">
-        <div style="text-align:center;padding:1em 0;"> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=large&timezone=America%2FNew_York" frameborder="0" seamless></iframe> </div>
-        <div class="calendar">
-          <iframe
-            src="https://calendar.google.com/calendar/embed?src=c_4cc84a151346d2bbf0e3374bec52748e8decd5fc068c7bb30e937dee04e2368c%40group.calendar.google.com&ctz=America%2FNew_York"
-            style="border: 0"
-            width="500"
-            height="600"
-            frameborder="0"
-            scrolling="no"
-          ></iframe>
-        </div>
+     
+        <div class="calender">
+            <%- include('calender.ejs') %>
+            </div>
+        <div class="todo-list"><%- include('todo.ejs') %></div>
+        
       </div>
 
       <div class="center-page">
+        <div class="clock-home" style="text-align: center; padding: 1em 0">
+            <iframe
+              src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=large&timezone=America%2FNew_York"
+              frameborder="0"
+              seamless
+            ></iframe>
+          </div>
         <div class="home-center">
           <div class="username">
             👋🏻 Welcome <span style="font-size: 3.5rem"><%= username %> </span>
           </div>
         </div>
         <div class="links">
-
           <div class="link">
-            <i class="fa-solid fa-pen-nib fa-lg" style="color: #ffffff;"></i>
-            Connect to Notion
+            <a href="https://www.notion.so/" target="_blank"> 
+              <i class="fa-solid fa-pen-nib fa-lg" style="color: #ffffff"></i>
+              Connect to Notion
+            </a>
+         
           </div>
           <div class="link">
-            <i class="fa-solid fa-calendar-alt fa-lg" style="color: #ffffff"></i>
+            <a href="https://calendar.google.com" target="_blank">
+            <i
+              class="fa-solid fa-calendar-alt fa-lg"
+              style="color: #ffffff"
+            ></i>
             Connect to Calendar
+            </a>
           </div>
           <div class="link">
-            <i class="fa-solid fa-chalkboard fa-lg" style="color: #ffffff;"></i>
+            <a href="https://digi-draw-live.glitch.me/" target="_blank">
+            <i class="fa-solid fa-chalkboard fa-lg" style="color: #ffffff"></i>
             Open Collaborative Whiteboard
+            </a>
           </div>
           <div class="link">
-            <i class="fa-solid fa-laptop-code fa-lg" style="color: #ffffff;"></i>
+            <i class="fa-solid fa-laptop-code fa-lg" style="color: #ffffff"></i>
             Open Collaborative Code editor
           </div>
-                              
         </div>
-        
+
         <div class="active-rooms">
-            <h2>Active Rooms:</h2>
+          <h2>Active Rooms:</h2>
           <div class="active-room">
             <% activeRooms.forEach(room => { %>
             <div class="room">
@@ -238,113 +253,141 @@
 
       setInterval(updateTime, 100);
     </script>
-    <script> (() => {
+    <script>
+      (() => {
         const init = () => {
+          updateClock();
+          setInterval(() => {
             updateClock();
-            setInterval(() => {
-                updateClock();
-            }, 1000);
+          }, 1000);
         };
-    
-        const updateClock = () => {
-            resetClock();
-            getCurrentTime();
-            displayCurrentTime();
-        };
-    
-        const getCurrentTime = () => {
-            let fullDate = new Date();
-            let month = fullDate.getMonth();
-            let date = fullDate.getDate();
-            let year = fullDate.getFullYear();
-            let day = fullDate.getDay();
-            let	hours = fullDate.getHours();
-            let	minutes = fullDate.getMinutes();
-            let	seconds = fullDate.getSeconds();
-            let period = (hours >= 12) ? "pm" : "am";
-    
-            window.clock = {};
-            window.clock.time = {
-                fullDate: fullDate,
-                month: month,
-                date: date,
-                year: year,
-                day: day,
-                hours: hours,
-                minutes: minutes,
-                seconds: seconds,
-                period: period
-            };
-        };
-    
-        const displayCurrentTime = () => {
-            let day = window.clock.time.day;
-            let month = window.clock.time.month;
-            let date = window.clock.time.date;
-            let year = window.clock.time.year;
-            let hours = window.clock.time.hours;
-            let minutes = window.clock.time.minutes;
-            let seconds = window.clock.time.seconds;
-            let period = window.clock.time.period;
-    
-            //formats hours
-            hours = (hours > 12) ? (hours - 12) : hours;
-            hours = (hours === 0) ? 12 : hours;
-            hours = (hours <= 9) ? ("0" + hours) : hours;
-            //formats minutes
-            minutes = (minutes <= 9) ? ("0" + minutes) : minutes;
-            //formats seconds
-            seconds = (seconds <= 9) ? ("0" + seconds) : seconds;
-            //formats day
-            let days = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
-            let dayText = ``;
-            if(days[day].length === 6) dayText = `<span style="color: #150316;">ooo</span>${days[day]}`;
-            if(days[day].length === 7) dayText = `<span style="color: #150316;">oo</span>${days[day]}`;
-            if(days[day].length === 8) dayText = `<span style="color: #150316;">o</span>${days[day]}`;
-            if(days[day].length === 9) dayText = `<span style="color: #150316;"></span>${days[day]}`;
-            //formats mobile day
-            let mobileDays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-            //formats month
-            let months = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
-            //formats date
-            date = (date <= 9) ? ("0" + date) : date;
-    
-            // targets the html
-            const dayHtml = document.getElementsByClassName('day-alpha')[0];
-            const mobileDayHtml = document.getElementsByClassName('day-alpha-mobile')[0];
-            const monthHtml = document.getElementsByClassName('month-alpha')[0];
-            const dateHtml = document.getElementsByClassName('date-number')[0];
-            const yearHtml = document.getElementsByClassName('year-number')[0];
-            const hoursHtml = document.getElementsByClassName('hours')[0];
-            const minutesHtml = document.getElementsByClassName('minutes')[0];
-            const secondsHtml = document.getElementsByClassName('seconds')[0];
-            const periodHtml = document.getElementsByClassName(period)[0];
-    
-            // changes the html values
-            dayHtml.innerHTML = dayText;
-            mobileDayHtml.innerHTML = mobileDays[day];
-            monthHtml.innerHTML = months[month];
-            dateHtml.innerHTML = date;
-            yearHtml.innerHTML = year;
-            hoursHtml.innerHTML = hours;
-            minutesHtml.innerHTML = minutes;
-            secondsHtml.innerHTML = seconds;
-            periodHtml.classList.add("light-on");
-        };
-    
-        const resetClock = () => {
-            const lights = document.querySelectorAll(".light-on");
-    
-            if(lights) {
-                lights.forEach(item => {
-                    item.classList.remove("light-on")
-                });
-            }
-        };
-    
-        return init();
-    })()</script>
 
+        const updateClock = () => {
+          resetClock();
+          getCurrentTime();
+          displayCurrentTime();
+        };
+
+        const getCurrentTime = () => {
+          let fullDate = new Date();
+          let month = fullDate.getMonth();
+          let date = fullDate.getDate();
+          let year = fullDate.getFullYear();
+          let day = fullDate.getDay();
+          let hours = fullDate.getHours();
+          let minutes = fullDate.getMinutes();
+          let seconds = fullDate.getSeconds();
+          let period = hours >= 12 ? "pm" : "am";
+
+          window.clock = {};
+          window.clock.time = {
+            fullDate: fullDate,
+            month: month,
+            date: date,
+            year: year,
+            day: day,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds,
+            period: period,
+          };
+        };
+
+        const displayCurrentTime = () => {
+          let day = window.clock.time.day;
+          let month = window.clock.time.month;
+          let date = window.clock.time.date;
+          let year = window.clock.time.year;
+          let hours = window.clock.time.hours;
+          let minutes = window.clock.time.minutes;
+          let seconds = window.clock.time.seconds;
+          let period = window.clock.time.period;
+
+          //formats hours
+          hours = hours > 12 ? hours - 12 : hours;
+          hours = hours === 0 ? 12 : hours;
+          hours = hours <= 9 ? "0" + hours : hours;
+          //formats minutes
+          minutes = minutes <= 9 ? "0" + minutes : minutes;
+          //formats seconds
+          seconds = seconds <= 9 ? "0" + seconds : seconds;
+          //formats day
+          let days = [
+            "sunday",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+          ];
+          let dayText = ``;
+          if (days[day].length === 6)
+            dayText = `<span style="color: #150316;">ooo</span>${days[day]}`;
+          if (days[day].length === 7)
+            dayText = `<span style="color: #150316;">oo</span>${days[day]}`;
+          if (days[day].length === 8)
+            dayText = `<span style="color: #150316;">o</span>${days[day]}`;
+          if (days[day].length === 9)
+            dayText = `<span style="color: #150316;"></span>${days[day]}`;
+          //formats mobile day
+          let mobileDays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+          //formats month
+          let months = [
+            "jan",
+            "feb",
+            "mar",
+            "apr",
+            "may",
+            "jun",
+            "jul",
+            "aug",
+            "sep",
+            "oct",
+            "nov",
+            "dec",
+          ];
+          //formats date
+          date = date <= 9 ? "0" + date : date;
+
+          // targets the html
+          const dayHtml = document.getElementsByClassName("day-alpha")[0];
+          const mobileDayHtml =
+            document.getElementsByClassName("day-alpha-mobile")[0];
+          const monthHtml = document.getElementsByClassName("month-alpha")[0];
+          const dateHtml = document.getElementsByClassName("date-number")[0];
+          const yearHtml = document.getElementsByClassName("year-number")[0];
+          const hoursHtml = document.getElementsByClassName("hours")[0];
+          const minutesHtml = document.getElementsByClassName("minutes")[0];
+          const secondsHtml = document.getElementsByClassName("seconds")[0];
+          const periodHtml = document.getElementsByClassName(period)[0];
+
+          // changes the html values
+          dayHtml.innerHTML = dayText;
+          mobileDayHtml.innerHTML = mobileDays[day];
+          monthHtml.innerHTML = months[month];
+          dateHtml.innerHTML = date;
+          yearHtml.innerHTML = year;
+          hoursHtml.innerHTML = hours;
+          minutesHtml.innerHTML = minutes;
+          secondsHtml.innerHTML = seconds;
+          periodHtml.classList.add("light-on");
+        };
+
+        const resetClock = () => {
+          const lights = document.querySelectorAll(".light-on");
+
+          if (lights) {
+            lights.forEach((item) => {
+              item.classList.remove("light-on");
+            });
+          }
+        };
+
+        return init();
+      })();
+    </script>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
     <!-- <div class="fade-img"> 
     <img src="../public/dashimg.jpg" alt="background"> 
    </div> -->

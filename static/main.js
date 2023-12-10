@@ -1,11 +1,15 @@
-const socket = io("/");
+console.log('Main script is running!');
+
+const socket = io('http://localhost:3030');
+
+
 const main__chat__window = document.getElementById("main__chat_window");
 const videoGrids = document.getElementById("video-grids");
 const myVideo = document.createElement("video");
 const chat = document.getElementById("chat");
 OtherUsername = "";
 chat.hidden = true;
-myVideo.muted = true;
+// myVideo.muted = true;
 
 window.onload = () => {
     $(document).ready(function() {
@@ -25,6 +29,16 @@ var getUserMedia =
     navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia;
+
+
+if (!getUserMedia) {
+    console.error('getUserMedia is not supported on this browser');
+} else {
+    console.log('getUserMedia is supported on this browser');
+}
+
+
+
 
 sendmessage = (text) => {
     if (event.key === "Enter" && text.value != "") {
@@ -72,7 +86,6 @@ peer.on("call", (call) => {
 peer.on("open", (id) => {
     socket.emit("join-room", roomId, id, myname);
 });
-
 socket.on("createMessage", (message) => {
     var ul = document.getElementById("messageadd");
     var li = document.createElement("li");
@@ -111,6 +124,10 @@ const connectToNewUser = (userId, streams, myname) => {
     peers[userId] = call;
 };
 
+
+
+
+
 const cancel = () => {
     $("#getCodeModal").modal("hide");
 };
@@ -118,7 +135,11 @@ const cancel = () => {
 const copy = async() => {
     const roomid = document.getElementById("roomid").innerText;
     await navigator.clipboard.writeText("http://localhost:3030/join/" + roomid);
+    console.log(roomid);
+    
 };
+  
+  
 const invitebox = () => {
     $("#getCodeModal").modal("show");
 };
@@ -160,6 +181,12 @@ const addVideoStream = (videoEl, stream, name) => {
         videoEl.play();
     });
     const h1 = document.createElement("h1");
+    h1.style.color=("white")
+    h1.style.opacity=("80%")
+    h1.style.fontSize=("1rem")
+    h1.style.padding=("10px")
+    h1.style.borderRadius=("10px")
+    h1.style.textTransform=("capitalize")
     const h1name = document.createTextNode(name);
     h1.appendChild(h1name);
     const videoGrid = document.createElement("div");
@@ -178,11 +205,11 @@ const addVideoStream = (videoEl, stream, name) => {
 };
 
 
-// function rainBg(){
-//     document.getElementById("rain").style.display="block"
-//     document.getElementById("city").style.display="none"
+function rainBg(){
+    document.getElementById("rain").style.display="block"
+    document.getElementById("city").style.display="none"
 
-// }
+}
 function updateSpotifyPlayer() {
     // Get the user's input from the text field
     var userInput = document.getElementById('spotifyUrl').value;
@@ -348,3 +375,14 @@ function seaBg() {
 
     } 
 }
+function toggleParticipants() {
+    let participantsDiv = document.querySelector('.main_left');
+    if (participantsDiv) {
+        if (participantsDiv.style.display === 'none' || participantsDiv.style.display === '') {
+            participantsDiv.style.display = 'block'; // You can use 'flex', 'grid', etc. depending on your layout
+        } else {
+            participantsDiv.style.display = 'none';
+        }
+    }
+}
+

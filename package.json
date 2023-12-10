@@ -18,11 +18,13 @@
         "ejs": "^3.1.6",
         "express": "^4.17.1",
         "express-session": "^1.17.3",
+        "http": "^0.0.1-security",
         "nedb": "^1.8.0",
         "nedb-session-store": "^1.1.2",
         "nodemon": "^3.0.1",
         "peer": "^0.5.3",
-        "socket.io": "^2.3.0",
+        "socket.io": "^2.5.0",
+        "socket.io-client": "^2.3.0",
         "uuid": "^8.3.2"
     }
 }

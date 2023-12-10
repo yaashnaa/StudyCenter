@@ -14,15 +14,6 @@ let minCount = 24;
 let customTimeInput = document.getElementById("customTimeInput");
 
 time.textContent = `${minCount + 1}:00`;
-customTimeInput.addEventListener("input", () => {
-  if (active === "custom") {
-    // If the timer is currently set to custom time, update the displayed time
-    minCount = parseInt(customTimeInput.value) - 1;
-    count = 59;
-    time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
-  }
-});
-
 
 const appendZero = (value) => {
   value = value < 10 ? `0${value}` : value;

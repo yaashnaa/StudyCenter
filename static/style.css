@@ -541,14 +541,15 @@ label {
   font-size: 1.2rem;
   font-weight: 500;
 }
-input {
+.register-form input {
   display: block;
   height: 2rem;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.07);
   border-radius: 3px;
   padding: 0 10px;
-  margin-top: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 14px;
   font-weight: 300;
   color: white;
@@ -680,6 +681,17 @@ form span {
 }
 
 .Name-Page input {
+  display: block;
+  height: 2rem;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  color: white;
   font-size: 1.2rem;
   padding: 1rem;
   margin: 1rem;
@@ -863,11 +875,12 @@ width: 25%;
 
 }
 
-.username {
+.calender{
+  /* height: 20vh;
+  width: 20vw; */
+}
 
-  
- 
-  margin-top: 7vh;
+.username {
   text-align: center;
   font-size: 5rem;
   font-family: 'Tangerine', cursive;
@@ -1108,6 +1121,13 @@ justify-content: space-between;
   justify-content: center;
   align-items: center;
   width: 50%;
+  height: 100vh;
+  position: relative;
+}
+
+.clock-home{
+  position: absolute;
+  top: 0;
 }
 
 .links{
@@ -1155,8 +1175,8 @@ justify-content: space-between;
 }
 
 .link:hover {
-  background: #F6F9FE;
-  color: #174ea6;
+  background:  rgb(86, 58, 72);
+  color: #ffffff;
 }
 
 .link:active {
@@ -1230,5 +1250,128 @@ justify-content: space-between;
   height: 100%;
   transition: 300ms;
   margin-right: .7rem;
+}
+
+
+
+/* Remove margins and padding from the list */
+.todo-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the list items */
+.todo-list ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: rgba(255, 255, 255, 0.13);
+  font-size: 18px;
+  transition: 0.2s;
+  
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+u.todo-list ul li:nth-child(odd) {
+  background: black;
+}
+
+/* Darker background-color on hover */
+.todo-list ul li:hover {
+  background: #656565;
+}
+
+/* When clicked on, add a background color and strike out text */
+.todo-list ul li.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+.todo-list ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+/* Style the close button */
+.todo-list .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.todo-list .close:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Style the header */
+.header {
+  background-color: var(--accent);
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+}
+
+/* Clear floats after the header */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the input */
+input {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+/* Style the "Add" button */
+.addBtn {
+  padding: 10px;
+  width: 25%;
+  background: #ffffff;
+  color: black  ;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+
+.todo-list{
+  border: white 2px solid;
+  padding: 2px;
+  width: 20vw;
+}
+
+#myDiv input{
+  font-size: 1.2rem;
 }
 

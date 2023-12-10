@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../public/styles.css" />
+    <link rel="stylesheet" href="../public/style.css" />
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.3.1/peerjs.min.js.map"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="/fontawesome-free-6.4.0-web/css/fontawesome.css"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@300&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link href="/fontawesome-free-6.4.0-web/css/solid.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/4737a162b6.js"
+      crossorigin="anonymous"
+    ></script>
+  
+  </head>
+
+  <body style=" font-family: 'Roboto', sans-serif;">
+   
+
+
+    <div id="mainclone" style="display: block">
+      <div class="navbar-room">
+        
+        <div class="navbar-right-room">
+          <div class="nav-items-room">
+            <div class="bg-flex">
+              <button class="button-85" onclick="changeBackground()">
+                <i class="fa-solid fa-image fa-lg" style="color: #ffffff"></i>
+              </button>
+            </div>
+            <div id="backgrounds" style="display: none;">
+              <div class="background-div">
+                <div class="bg-img">
+                  <button
+                    class="bg-btns-room"
+                    onclick="rainBg()"  
+                    style="cursor: pointer"
+                  >
+                    City
+                    <img src="../public/uploads/cityimg.png" style="height: 6rem;">
+                  </button>
+               
+                </div>
+              <div class="bg-img">
+                <button
+                  class="bg-btns-room"
+                  onclick="treeBg()"
+                  style="cursor: pointer"
+                >
+                  Tree
+                  <img src="../public/uploads/treeimg.png" style="height: 6rem;">
+                </button>
+              </div>
+              <div class="bg-img">
+              <button
+                class="bg-btns-room"
+                onclick="firefliesBg()"
+                style="cursor: pointer"
+              >
+                fireflies
+                <img src="../public/uploads/firefliesimg.png" style="height: 6rem;">
+              </button>
+              </div>
+              <div class="bg-img">
+              <button class="bg-btns-room" onclick="seaBg()" style="cursor: pointer">
+                Sea
+                <img src="../public/uploads/seaimg.png" style="height: 6rem;">
+              </button>
+              </div>
+              <div class="bg-img">
+              <button
+                class="bg-btns-room"
+                onclick="laptopBg()"
+                style="cursor: pointer"
+              >
+                Laptop
+                <img src="../public/uploads/laptopimg.png" style="height: 6rem;">
+              </button>
+              </div>
+              <div class="bg-img">
+              <button
+                class="bg-btns-room"
+                onclick="cityBg()"
+                style="cursor: pointer"
+              >
+                Rain
+                <img src="../public/uploads/rainimg.png" style="height: 6rem;">
+              </button>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-items-room">
+            <button class="button-85" onclick="music()">
+              <i class="fa-solid fa-music fa-lg" style="color: #ffffff"></i>
+            </button>
+     
+            <div class="spotify-flex">
+              <div id="spotify-player" style="display: none">
+                <div class="music">
+                    <div class="elfsight-app-f363467f-b95c-49fc-899d-94d485d88eff" data-elfsight-app-lazy></div>
+                    or
+                    <div class="button-flex">
+                      <label for="spotifyUrl">Enter Spotify URL:</label>
+                      <input
+                        type="text"
+                        id="spotifyUrl"
+                        placeholder="https://open.spotify.com/playlist/your_playlist_id"
+                      />
+
+                      <!-- Button to update the Spotify player with the user's input -->
+                      <button
+                        class="button-11"
+                        style="color: white; text-align: center"
+                        onclick="updateSpotifyPlayer()"
+                      >
+                        Update Player
+                      </button>
+
+                      <!-- Container for the Spotify player -->
+                      <div id="spotifyPlayer"></div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-items-room">
+            <a href="https://www.coolmathgames.com/" target="_blank">
+            <button class="button-85">
+              <i class="fa-solid fa-gamepad fa-xl" style="color: #ffffff"></i>
+            </button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="timer-div"><%- include('timer.ejs') %></div>
+
+      
+      <div class="main_controls">
+            <div class="main_controls_left">
+            <div class="navbar-left-room">
+                <a href="/">
+                <button class="button-85">
+                    <i
+                    class="fa-solid fa-graduation-cap fa-lg"
+                    style="color: #ffffff"
+                    ></i>
+                    StudyHub
+                </button>
+                </a>
+            </div>
+            <div class="main_controls_button leave-meeting">
+                <a href="/home"
+                ><i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i> Leave
+                meeting</a
+                >
+            </div>
+            </div>
+      </div>
+      
+    </div>
+
+    <img
+      id="rain"
+      src="../public/uploads/city.gif"
+      alt="Animated GIF"
+      style="display: block"
+    />
+    <img
+      id="city"
+      src="../public/uploads/rain.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+    <img
+      id="sea"
+      src="../public/uploads/sea.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+    <img
+      id="laptop"
+      src="../public/uploads/laptop.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+    <img
+      id="fireflies"
+      src="../public/uploads/fireflies.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+    <img
+      id="tree"
+      src="../public/uploads/tree.gif"
+      alt="Animated GIF"
+      style="display: none"
+    />
+
+    <script src="../public/main.js"></script>
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+  </body>
+</html>

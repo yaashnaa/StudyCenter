@@ -7,7 +7,7 @@
   }
   .container {
     background-color: #1b1b1b;
-    opacity: 70%;
+    opacity: 90%;
     /* width: min(90%, 500px); */
     /* position: absolute;
     transform: translate(-50%, -50%);
@@ -15,6 +15,7 @@
     left: 50%; */
     padding: 4em 2em;
     border-radius: 0.5em;
+    height: 25vh;
   }
   button {
     border: none;
@@ -33,7 +34,7 @@
     color: #a9a7a7;
   }
   .btn-focus {
-    background-color: var(--accent);
+    background-color: #f078a7;
     opacity: 100%;
     color: #ffffff;
   }
